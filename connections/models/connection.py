@@ -15,9 +15,10 @@ class ConnectionType(enum.Enum):
     friend = 'friend'
     coworker = 'coworker'
 
+    # Return list of values so we can easily check if a value is in the Enum
     @classmethod
     def list(cls):
-        return list(map(lambda c: c.value, cls))  # Return list of values so we can easily check if a value is in the Enum
+        return list(map(lambda c: c.value, cls))
 
 
 class Connection(Model, CRUDMixin, CreatedUpdatedMixin):
@@ -29,4 +30,3 @@ class Connection(Model, CRUDMixin, CreatedUpdatedMixin):
     # Automagically get to/from people
     from_person = db.relationship('Person', foreign_keys=[from_person_id])
     to_person = db.relationship('Person', foreign_keys=[to_person_id])
-

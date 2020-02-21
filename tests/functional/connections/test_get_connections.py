@@ -2,7 +2,6 @@ from http import HTTPStatus
 
 from tests.factories import ConnectionFactory
 
-from connections.models.connection import Connection
 
 EXPECTED_FIELDS = [
     'id',
