@@ -4,6 +4,7 @@ from tests.factories import PersonFactory
 
 from connections.models.connection import Connection
 
+
 def test_patch_connection(db, testapp):
     person_from = PersonFactory(first_name='Sally')
     person_to = PersonFactory(first_name='Harry')
@@ -21,9 +22,9 @@ def test_patch_connection(db, testapp):
 
     # Now Patch!
     payload = {
-        'connection_type': 'friend',
+        'connection_type': 'friend'
     }
-    res = testapp.patch('/connections/' + str(res.json['id']) , json=payload)
+    res = testapp.patch('/connections/' + str(res.json['id']), json=payload)
 
     connection = Connection.query.get(res.json['id'])
 
@@ -31,7 +32,6 @@ def test_patch_connection(db, testapp):
     assert connection.from_person_id == person_from.id
     assert connection.to_person_id == person_to.id
     assert connection.connection_type.value == 'friend'
-
 
 
 # TODO: Test failure conditions for invalid connection id, connection_type (xfailed?)

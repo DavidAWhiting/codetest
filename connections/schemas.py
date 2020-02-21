@@ -22,8 +22,9 @@ class ConnectionSchema(BaseModelSchema):
     to_person_id = fields.Integer()
     connection_type = EnumField(ConnectionType)
 
-    from_person = fields.Nested(PersonSchema(), exclude=('connections',))   # TODO: Find proper way to exclude 'connections'
-    to_person = fields.Nested(PersonSchema(), exclude=('connections',))     # TODO: Find proper way to exclude 'connections'
+    # TODO: Find proper way to exclude 'connections'
+    from_person = fields.Nested(PersonSchema(), exclude=('connections',))
+    to_person = fields.Nested(PersonSchema(), exclude=('connections',))
 
     class Meta:
         model = Connection
