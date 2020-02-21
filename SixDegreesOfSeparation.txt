@@ -1,0 +1,13 @@
+For the Six Degrees of Separation feature there are many things to consider:
+- How many levels do we want to max out at?  Is that an n^n operation?
+- How can we short circuit lookups (especially since a friend will have multiple levels of connection, we likely want
+ to stop that connection from being found again)- Return object could be an array, each containing the degree of
+ separation and itself containing an array of Person at that degree (structure may be decided depending on utilization of the webservice)
+- What is the max degrees of separation that is actually useful?
+- Are "connected" people actually public?  What security needs to be placed around what information we can retrieve?  
+
+As for implementation, it would be easy to get caught in a recursion of database lookups based on degree.  Depending
+on the number of people in the system, it might be easier to get the entire list and process it in code.  However, for
+large systems I would suggest looking into optimizing database quer(ies) to minimize the amount of processing involved.
+For much larger systems, it might even be useful to have  background process determining the connective properties
+between users for easier lookups in a live system.
