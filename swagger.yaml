@@ -47,6 +47,38 @@ paths:
               $ref: "#/definitions/Person"
         400:
           description: "Invalid input"
+  /people/{person_id}/degrees_of_separation?degrees={max_degrees}:
+    get:
+      summary: "Get a list of people separated by a maximum number of people"
+      description: ""
+      operationId: "getPeopleByDegreesOfSeparation"
+      produces:
+      - :application/json"
+      parameters:
+      - in: path
+        name: person_id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: Numeric ID of the person to find the connected people
+      - in: path
+        name: max_degrees
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 6
+        description: Integer value of the limit of the degrees which people can from separated
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PersonByDegreesOfSeparation"
+        400:
+          description: "Invalid input"
   /connections:
     get:
       summary: "Get list of connections"
@@ -205,6 +237,23 @@ definitions:
         - "sister"
         - "friend"
         - "coworker"
+
+  PersonByDegreesOfSeparation:
+    type: "object"
+    properties:
+      separation_degrees:
+        type: "integer"
+        format: "int64"
+      id:
+        type: "integer"
+        format: "int64"
+      first_name:
+        type: "string"
+      last_name:
+        type: "string"
+      email:
+        type: "string"
+
 
 externalDocs:
   description: "Find out more about Swagger"
